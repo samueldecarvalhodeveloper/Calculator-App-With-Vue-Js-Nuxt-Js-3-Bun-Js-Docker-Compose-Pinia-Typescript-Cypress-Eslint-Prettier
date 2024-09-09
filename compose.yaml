@@ -1,0 +1,29 @@
+services:
+  testing:
+    build:
+      context: .
+      dockerfile: dockerfile.testing
+      tags:
+        - testing
+    volumes:
+      - ./:/src/app/
+
+  development:
+    build:
+      context: .
+      dockerfile: dockerfile.development
+      tags:
+        - development
+    volumes:
+      - ./:/src/app/
+    ports:
+      - 3001:3000
+
+  production:
+    build:
+      context: .
+      dockerfile: dockerfile.production
+      tags:
+        - production
+    ports:
+      - 3000:3000
