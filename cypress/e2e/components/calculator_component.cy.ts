@@ -1,5 +1,5 @@
 import CalculationExpression from "../../../domains/calculator/calculation_expression";
-import type CalculationExpressionActiveRecord from "../../../domains/calculator/calculation_expression_active_record";
+import CalculationExpressionActiveRecord from "../../../domains/calculator/calculation_expression_active_record";
 import CalculationExpressionActiveRecordDecorator from "../../../domains/calculator/calculation_expression_active_record_decorator";
 import CalculationExpressionRegister from "../../../domains/calculator/calculation_expression_register";
 import Calculator from "../../../domains/calculator/calculator";
@@ -26,25 +26,74 @@ describe('Test Component "Calculator" Behavior', () => {
     calculationExpressionActiveRecord.turnCalculationExpressionEmpty();
   });
 
-  it("Test If Component Handles Data Input And Output Scenario", () => {
+  it("Test Getting Current Calculation Expression", () => {
+    const currentCalculationExpressionFromCalculationExpressionActiveRecord =
+      calculator.getExpression();
+    const currentCalculationExpressionFromCalculator =
+      calculator.getExpression();
+
+    expect(currentCalculationExpressionFromCalculator).equal(
+      currentCalculationExpressionFromCalculationExpressionActiveRecord,
+    );
+  });
+
+  it("Test Adding Chose Character On Calculation Expression", () => {
     calculator.addCharacter(CalculatorCharacters.ONE);
-    calculator.addCharacter(CalculatorCharacters.ADDITION);
-    calculator.addCharacter(CalculatorCharacters.ONE);
+
+    const currentCalculationExpression =
+      calculationExpressionActiveRecord.getCalculationExpression();
+
+    expect(currentCalculationExpression).equal(CalculatorCharacters.ONE);
+  });
+
+  it("Test Removing Last Character Of Calculation Expression", () => {
+    calculationExpressionActiveRecord.addCharacterToCalculationExpression(
+      CalculatorCharacters.ONE,
+    );
+    calculationExpressionActiveRecord.addCharacterToCalculationExpression(
+      CalculatorCharacters.ONE,
+    );
 
     calculator.backspace();
 
-    calculator.addCharacter(CalculatorCharacters.ONE);
+    const currentCalculationExpression =
+      calculationExpressionActiveRecord.getCalculationExpression();
 
-    calculator.evaluate();
+    expect(currentCalculationExpression).equal(CalculatorCharacters.ONE);
+  });
 
-    const evaluatedCalculationExpression = calculator.getExpression();
-
-    expect(evaluatedCalculationExpression).equals(CalculatorCharacters.TWO);
+  it("Test Removing All Character From Calculation Expression", () => {
+    calculationExpressionActiveRecord.addCharacterToCalculationExpression(
+      CalculatorCharacters.ONE,
+    );
+    calculationExpressionActiveRecord.addCharacterToCalculationExpression(
+      CalculatorCharacters.ONE,
+    );
 
     calculator.clean();
 
-    const cleanedCalculationExpression = calculator.getExpression();
+    const currentCalculationExpression =
+      calculationExpressionActiveRecord.getCalculationExpression();
 
-    expect(cleanedCalculationExpression).equals("");
+    expect(currentCalculationExpression).equal("");
+  });
+
+  it("Test Evaluating Calculation Expression", () => {
+    calculationExpressionActiveRecord.addCharacterToCalculationExpression(
+      CalculatorCharacters.ONE,
+    );
+    calculationExpressionActiveRecord.addCharacterToCalculationExpression(
+      CalculatorCharacters.ADDITION,
+    );
+    calculationExpressionActiveRecord.addCharacterToCalculationExpression(
+      CalculatorCharacters.ONE,
+    );
+
+    calculator.evaluate();
+
+    const currentCalculationExpression =
+      calculationExpressionActiveRecord.getCalculationExpression();
+
+    expect(currentCalculationExpression).equal(CalculatorCharacters.TWO);
   });
 });

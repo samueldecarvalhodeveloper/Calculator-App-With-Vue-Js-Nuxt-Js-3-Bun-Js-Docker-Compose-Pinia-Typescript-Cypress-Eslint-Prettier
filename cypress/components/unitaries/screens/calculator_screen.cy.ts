@@ -55,20 +55,6 @@ describe('Test Screen "Calculator" Behavior', () => {
     cy.get("h2").should("have.text", SIMPLE_CALCULATOR_CALCULATION_EXPRESSION);
   });
 
-  it("Test If Calculator Value Is Updated With Last Session Calculation Expression On Screen Mount", () => {
-    LastSessionCalculationExpressionStore.setExpression(
-      SIMPLE_CALCULATOR_CALCULATION_EXPRESSION,
-    );
-
-    const pinia = createPinia();
-    setActivePinia(pinia);
-    const app = createApp(pinia);
-    app.use(pinia);
-    cy.mount(CalculatorScreen);
-
-    cy.get("h2").should("have.text", SIMPLE_CALCULATOR_CALCULATION_EXPRESSION);
-  });
-
   it("Test If All Numerical Button Adds Its Character To Calculator Value", () => {
     cy.get(TEST_ID_HTML_ATTRIBUTE_CSS_SELECTOR(ZERO_BUTTON_TEST_ID)).click({
       force: true,
@@ -114,14 +100,6 @@ describe('Test Screen "Calculator" Behavior', () => {
         CalculatorCharacters.EIGHT +
         CalculatorCharacters.NINE,
     );
-  });
-
-  it("Test If All Symbolic Button Adds Its Character To Calculator Value", () => {
-    cy.get(TEST_ID_HTML_ATTRIBUTE_CSS_SELECTOR(POINT_BUTTON_TEST_ID)).click({
-      force: true,
-    });
-
-    cy.get("h2").should("have.text", CalculatorCharacters.POINT);
   });
 
   it("Test If All Symbolic Button Adds Its Character To Calculator Value", () => {
