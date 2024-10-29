@@ -24,4 +24,4 @@ RUN bun run build
 
 CMD bun run preview
 
-EXPOSE 3000
+EXPOSE 3001
