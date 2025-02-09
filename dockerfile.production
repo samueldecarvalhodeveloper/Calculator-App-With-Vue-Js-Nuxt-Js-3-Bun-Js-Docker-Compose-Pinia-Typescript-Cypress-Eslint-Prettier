@@ -17,7 +17,6 @@ COPY ./domains/ /src/app/domains/
 COPY ./constants/ /src/app/constants/
 COPY ./components/ /src/app/components/
 COPY ./assets/ /src/app/assets/
-COPY ./.nuxt/ /src/app/.nuxt/
 
 RUN bun install --production
 RUN bun run build
