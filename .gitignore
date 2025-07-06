@@ -17,8 +17,6 @@ logs
 .DS_Store
 .fleet
 .idea
-bun.lockb
-package-lock.json
 cypress/screenshots
 
 # Local env files
