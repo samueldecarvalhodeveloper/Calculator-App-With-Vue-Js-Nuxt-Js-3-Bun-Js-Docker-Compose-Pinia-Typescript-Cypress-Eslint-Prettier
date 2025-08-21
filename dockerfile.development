@@ -1,0 +1,25 @@
+#syntax=docker/dockerfile:1
+
+FROM oven/bun:1.2.20-alpine
+
+WORKDIR /src/app/
+
+COPY ./tsconfig.json /src/app/tsconfig.json
+COPY ./package.json /src/app/package.json
+COPY ./nuxt.config.ts /src/app/nuxt.config.ts
+COPY ./app.vue /src/app/app.vue
+COPY ./stores/ /src/app/stores/
+COPY ./server/ /src/app/server/
+COPY ./screens/ /src/app/screens/
+COPY ./public/ /src/app/public/
+COPY ./infrastructure/ /src/app/infrastructure/
+COPY ./domains/ /src/app/domains/
+COPY ./constants/ /src/app/constants/
+COPY ./components/ /src/app/components/
+COPY ./assets/ /src/app/assets/
+
+RUN bun install --production
+
+CMD bun run dev
+
+EXPOSE 3000
