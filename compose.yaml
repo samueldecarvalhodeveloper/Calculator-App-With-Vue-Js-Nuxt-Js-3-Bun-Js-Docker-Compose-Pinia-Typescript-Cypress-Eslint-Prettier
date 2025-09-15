@@ -1,0 +1,23 @@
+services:
+  testing:
+    build:
+      context: .
+      dockerfile: dockerfile.testing
+      tags:
+        - testing
+
+  development:
+    build:
+      context: .
+      dockerfile: dockerfile.development
+      tags:
+        - development
+    network_mode: "host"
+
+  production:
+    build:
+      context: .
+      dockerfile: dockerfile.production
+      tags:
+        - production
+    network_mode: "host"
