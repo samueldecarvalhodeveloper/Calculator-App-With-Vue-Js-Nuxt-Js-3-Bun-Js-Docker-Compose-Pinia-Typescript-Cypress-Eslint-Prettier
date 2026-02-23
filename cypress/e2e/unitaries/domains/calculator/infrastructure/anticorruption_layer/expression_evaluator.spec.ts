@@ -1,11 +1,11 @@
 import { NOT_VALID_EXPRESSION_ERROR_MESSAGE } from "../../../../../../../constants/domains/calculator_constants";
 import CalculatorCharacters from "../../../../../../../domains/calculator/calculator_characters";
-import ExpressionEvaluater from "../../../../../../../domains/calculator/infrastructure/anticorruption_layer/expression_evaluater";
+import ExpressionEvaluator from "../../../../../../../domains/calculator/infrastructure/anticorruption_layer/expression_evaluator";
 
-describe('Test Class "ExpressionEvaluater" Behavior', () => {
+describe('Test Class "ExpressionEvaluator" Behavior', () => {
   it('Test If Method "getEvaluatedExpression" Returns Evaluated Expression', () => {
     const evaluatedExpression: string =
-      ExpressionEvaluater.getEvaluatedExpression(
+      ExpressionEvaluator.getEvaluatedExpression(
         CalculatorCharacters.ONE +
           CalculatorCharacters.ADDITION +
           CalculatorCharacters.ONE,
@@ -15,7 +15,7 @@ describe('Test Class "ExpressionEvaluater" Behavior', () => {
   });
 
   it('Test If Method "getEvaluatedExpression" Returns Not Valid Expression Exception If Expression Is Not Valid', () => {
-    const evaluatedExpression = ExpressionEvaluater.getEvaluatedExpression(
+    const evaluatedExpression = ExpressionEvaluator.getEvaluatedExpression(
       CalculatorCharacters.ADDITION,
     );
 
